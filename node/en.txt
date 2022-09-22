@@ -1,0 +1,12 @@
+sudo curl -o /etc/yum.repos.d/klaytn.repo https://packages.klaytn.net/config/rhel/7/prod.repo && sudo yum install kend
+
+// Data dir 생성
+sudo mkdir -p /var/kend/data
+
+// Data dir 경로 설정
+nano /etc/kend/conf/kend.conf
+
+// 서비스 시작
+sudo systemctl start kend.service
+
+scp -r /home/ec2-user/homi-linux-amd64/bin/homi-output/ 41ecc1d52296461c3db539f2b2814206b3d0257a06ed95b34657d5b4bb456d656e70044bf5847d3a5f0bff4317f6957a541408abe241d81ac6114d941ebd8030@ec2-15-152-142-53.ap-northeast-3.compute.amazonaws.com:/home/ec2-user/
