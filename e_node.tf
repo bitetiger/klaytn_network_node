@@ -8,6 +8,11 @@ resource "aws_instance" "en_node" {
     Name = "en_node"
   }
 
+  provisioner "remote-exec" {
+    script = "./bootstrap.sh"
+  }
+
+
 }
 
 resource "aws_subnet" "en_subnet" {
@@ -18,6 +23,7 @@ resource "aws_subnet" "en_subnet" {
   tags = {
     Name = "en_subnet"
   }
+
 }
 
 resource "aws_security_group" "en_sg" {
