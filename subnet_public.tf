@@ -1,4 +1,3 @@
-
 resource "aws_internet_gateway" "my_vpc_gw" {
   vpc_id = aws_vpc.my_vpc.id
 
@@ -27,8 +26,8 @@ resource "aws_main_route_table_association" "route_association" {
 
 resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "172.16.10.0/24"
-  availability_zone = "ap-northeast-3a"
+  cidr_block        = "10.0.2.0/24"
+  availability_zone = "ap-northeast-2a"
   map_public_ip_on_launch = true
   tags = {
     Name = "public"
