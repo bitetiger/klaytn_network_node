@@ -1,5 +1,7 @@
 # klaytn_EN-SCN
 클레이튼 서비스 체인을 구성하고 엔드포인트 노드를 통해 블록
+![image](https://user-images.githubusercontent.com/89952061/192111327-301e9d11-c4eb-47e9-8f0b-1bc31a584a61.png)
+
 
 노드 구축
 노드 운영
