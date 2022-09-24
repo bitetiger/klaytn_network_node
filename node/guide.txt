@@ -63,3 +63,13 @@ tar xvf homi-v1.9.0-0-linux-amd64.tar.gz
      "${aws_s3_bucket.spike-bucket.arn}/*",
 
      command = "echo 'DOCKER_OPTS=\"-H tcp://0.0.0.0:2375\"' > ~/terraform/37869163/output"
+
+//scn 명렁어 모음
+export PATH=$PATH:/home/ec2-user/kscn-linux-amd64/bin
+kscnd start
+
+//블록 상태 확인
+kscn attach --datadir ~/data
+klay.blockNumber
+
+

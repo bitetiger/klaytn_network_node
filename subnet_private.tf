@@ -44,8 +44,8 @@ resource "aws_route" "private_nat_1" {
   nat_gateway_id              = aws_nat_gateway.nat_gateway_1.id
 }
 
-resource "aws_security_group" "scn_sg" {
-  name        = "scn_sg"
+resource "aws_security_group" "private_sg" {
+  name        = "private_sg"
   vpc_id      = aws_vpc.my_vpc.id
   description = "SSH from Anywhere"
 
