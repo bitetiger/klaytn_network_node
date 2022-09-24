@@ -6,20 +6,7 @@ resource "aws_instance" "grafana-ec2-final" {
 
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.allow_grafana.id]
-
-  user_data = <<EOF
-#!/bin/bash
-sudo apt-get install -y apt-transport-https
-sudo apt-get install -y software-properties-common wget
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
-sudo apt-get update
-sudo apt-get install -y grafana
-sudo systemctl daemon-reload
-sudo systemctl start grafana-server
-sudo systemctl status grafana-server
-sudo systemctl enable grafana-server.service
-EOF
+  user_data = "${file("./scripts/grafana.sh")}"
 
   tags = {
     Name = "grafana-ec2-final"
