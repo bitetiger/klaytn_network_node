@@ -1,9 +1,9 @@
 resource "aws_instance" "ansible" {
-  ami           = "ami-01d87646ef267ccd7"
+  ami           = "ami-0e9bfdb247cc8de84"
   instance_type = "t2.micro"
   iam_instance_profile = aws_iam_instance_profile.profile.name
   subnet_id       = aws_subnet.private_subnet.id
-  security_groups = [aws_security_group.en_sg.id]
+  security_groups = [aws_security_group.private_sg.id]
 
   tags = {
     Name = "ansible_master"

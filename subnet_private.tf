@@ -10,7 +10,7 @@ resource "aws_nat_gateway" "nat_gateway_1" {
   allocation_id = aws_eip.nat_1.id
 
   # Private subnet이 아니라 public subnet을 연결
-  subnet_id = aws_subnet.my_subnet.id
+  subnet_id = aws_subnet.grafana_subnet.id
 
   tags = {
     Name = "NAT-GW-1"
@@ -48,14 +48,6 @@ resource "aws_security_group" "private_sg" {
   name        = "private_sg"
   vpc_id      = aws_vpc.my_vpc.id
   description = "SSH from Anywhere"
-
- ingress {
-   description = "HTTP Access"
-   from_port   = 22323
-   to_port     = 22323
-   protocol    = "tcp"
-   cidr_blocks = ["0.0.0.0/0"]
- }
  
  ingress {
    description = "SSH Access"
