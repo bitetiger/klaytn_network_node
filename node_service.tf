@@ -1,69 +1,93 @@
-resource "aws_instance" "sc_node_1" {
-  ami           = "ami-0e5fb7f8e944e868f"
-  instance_type = "t2.micro"
+# Enpoint와 연결되는 Master SCN 
+resource "aws_instance" "scn-master" {
+  ami           = "ami-058165de3b7202099"
+  instance_type = "t2.medium"
   subnet_id       = aws_subnet.my_subnet.id
   security_groups = [aws_security_group.en_sg.id]
   associate_public_ip_address = true
   key_name = aws_key_pair.kp.key_name
  
   connection {
-        user = "ec2-user"
-        private_key = file("./${aws_instance.sc_node_1.key_name}.pem")
+        user = "ubuntu"
+        private_key = file("./${aws_key_pair.kp.key_name}.pem")
         host = self.public_ip
         }
 
   provisioner "file" {
-    source      = "./${aws_instance.sc_node_1.key_name}.pem"
-    destination = "/home/ec2-user/${aws_instance.sc_node_1.key_name}.pem"
+    source      = "./${aws_key_pair.kp.key_name}.pem"
+    destination = "/home/ubuntu/${aws_key_pair.kp.key_name}.pem"
        }
 
     provisioner "remote-exec" {
         inline = [
-            "echo '[\"kni://e8075b09d3712458040067aaf8f306fc863c2d5e67baf8083f18438e2c4d1b9ee02e3b43b305bd6261e918e94c723b1777b3b89df0c729372cf863833327b5e8@${aws_instance.en_node.public_dns}:50505?discport=0\"]' > ~/main-bridges.json",
-            "echo '[\"kni://9a9d4f504fa20c951068e2bab5ffb6e5bcf09c523efd4b0b4073423a88105dc46abb941a28a4699459faf8bad852ca02866fa26234d5fe57b33c923e074aab48@${aws_instance.sc_node_1.public_dns}:22323?discport=0\u0026ntype=cn\",\"kni://ef212b34db217c53893e56d816591ab9014ff7c1f3e6cb9a1312bfe3f6ae6631c1674368f6e7e7369ac0307c06d30cf35c9e092dabaa98912c7dccb5fd6fb556@${aws_instance.sc_node_2.public_dns}:22323?discport=0\u0026ntype=cn\",\"kni://ea7edf28dff063cf24129a51a75641154687c76a2f1abace3c6bf9be70a88ad189bfef8c036bcf8c1105fe99b88683c9fa1cafc8bb4cbf80d1c04ae48b633446@${aws_instance.sc_node_3.public_dns}:22323?discport=0\u0026ntype=cn\",\"kni://09e18bf7f4b20dd5e3125f7caa2520b89b8ec02462058a224196784997e961f16accaf149c458707d5963fc92db8f42da42873b81784d415f9aef2f64e6d1bfa@${aws_instance.sc_node_4.public_dns}:22323?discport=0\u0026ntype=cn\"]' > ~/data/static-nodes.json",
-            "sudo scp -r -i /home/ec2-user/${aws_instance.sc_node_1.key_name}.pem -o StrictHostKeyChecking=no ~/data/static-nodes.json ec2-user@${aws_instance.sc_node_2.public_dns}:~/data/",
-            "sudo scp -r -i /home/ec2-user/${aws_instance.sc_node_1.key_name}.pem -o StrictHostKeyChecking=no ~/data/static-nodes.json ec2-user@${aws_instance.sc_node_3.public_dns}:~/data/",
-            "sudo scp -r -i /home/ec2-user/${aws_instance.sc_node_1.key_name}.pem -o StrictHostKeyChecking=no ~/data/static-nodes.json ec2-user@${aws_instance.sc_node_4.public_dns}:~/data/" 
-        ]
+            "cd /home/ubuntu",
+            "wget https://packages.klaytn.net/klaytn/v1.9.0/kscn-v1.9.0-0-linux-amd64.tar.gz",
+            "tar xvf kscn-v1.9.0-0-linux-amd64.tar.gz",
+            "export PATH=$PATH:~/kscn-v1.9.0-0-linux-amd64/bin",
+            "wget https://packages.klaytn.net/klaytn/v1.9.0/homi-v1.9.0-0-linux-amd64.tar.gz",
+            "tar xvf homi-v1.9.0-0-linux-amd64.tar.gz",
+            "cd homi-linux-amd64/bin/",
+            "./homi setup local --cn-num 4 --test-num 1 --servicechain --chainID 1002 --p2p-port 22323 -o homi-output"
+            ]
         } 
 
   tags = {
-    Name = "sc_node_1"
+    Name = "scn-master"
   }
 }
 
-resource "aws_instance" "sc_node_2" {
-  ami           = "ami-0d8be23d894b37b53"
-  instance_type = "t2.micro"
-  subnet_id       = aws_subnet.my_subnet.id
-  security_groups = [aws_security_group.en_sg.id]
-  key_name = aws_key_pair.kp.key_name
-
+resource "aws_eip" "scn_master" {
+  vpc   = true
   tags = {
-    Name = "sc_node_2"
+    Name = "scn-master"
   }
 }
 
-resource "aws_instance" "sc_node_3" {
-  ami           = "ami-044e3b7b96559bd13"
-  instance_type = "t2.micro"
+resource "aws_eip_association" "scn_master" {
+  instance_id   = aws_instance.scn-master.id
+  allocation_id = aws_eip.scn_master.id
+}
+
+# 일반 SCN 노드
+resource "aws_instance" "sc_node" {
+  ami           = "ami-058165de3b7202099"
+  instance_type = "t2.medium"
   subnet_id       = aws_subnet.my_subnet.id
   security_groups = [aws_security_group.en_sg.id]
+  associate_public_ip_address = true
   key_name = aws_key_pair.kp.key_name
+  count    = 3
+ 
+  connection {
+        user = "ubuntu"
+        private_key = file("./${aws_key_pair.kp.key_name}.pem")
+        host = self.public_ip
+        }
+
+    provisioner "remote-exec" {
+        inline = [
+            "cd ~",
+            "wget https://packages.klaytn.net/klaytn/v1.9.0/kscn-v1.9.0-0-linux-amd64.tar.gz",
+            "tar xvf kscn-v1.9.0-0-linux-amd64.tar.gz",
+            "export PATH=$PATH:~/kscn-v1.9.0-0-linux-amd64/bin",
+            ]
+        } 
 
   tags = {
-    Name = "sc_node_3"
+    Name = "scn-${count.index + 1}"
   }
 }
 
-resource "aws_instance" "sc_node_4" {
-  ami           = "ami-088ad74b092dedbcf"
-  instance_type = "t2.micro"
-  subnet_id       = aws_subnet.my_subnet.id
-  security_groups = [aws_security_group.en_sg.id]
-  key_name = aws_key_pair.kp.key_name
-
+resource "aws_eip" "scn" {
+  count = 3
+  vpc   = true
   tags = {
-    Name = "sc_node_4"
+    Name = "scn-${count.index + 1}"
   }
+}
+
+resource "aws_eip_association" "scn" {
+  count         = 3
+  instance_id   = aws_instance.sc_node[count.index].id
+  allocation_id = aws_eip.scn[count.index].id
 }

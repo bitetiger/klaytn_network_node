@@ -1,6 +1,9 @@
 //en의 kni
 "kni://e8075b09d3712458040067aaf8f306fc863c2d5e67baf8083f18438e2c4d1b9ee02e3b43b305bd6261e918e94c723b1777b3b89df0c729372cf863833327b5e8@[::]:50505?discport=0"
 
+//9.25 en kni
+"kni://81ad0ff29b931577316eb0ed52a40b13b2dcc19703151d1112ce65a362373bee962b62d1ce630578dd9bf3b1298fa7dca2328a7eb960d31bdf10158aa5812174@ec2-43-201-70-29.ap-northeast-2.compute.amazonaws.com:50505?discport=0"
+
 //en의 kni ip추가
 "kni://e8075b09d3712458040067aaf8f306fc863c2d5e67baf8083f18438e2c4d1b9ee02e3b43b305bd6261e918e94c723b1777b3b89df0c729372cf863833327b5e8@★ec2-3-35-171-4.ap-northeast-2.compute.amazonaws.com:50505?discport=0"
 
@@ -72,4 +75,11 @@ kscnd start
 kscn attach --datadir ~/data
 klay.blockNumber
 
+//peer 연결 확인
+kscn attach --datadir ~/data
+subbridge.peers.length
+
+//endpoint node
+ken attach --datadir ~/data
+mainbridge.nodeInfo.kni
 

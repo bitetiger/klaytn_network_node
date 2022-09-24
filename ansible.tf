@@ -4,10 +4,12 @@ resource "aws_instance" "ansible" {
   iam_instance_profile = aws_iam_instance_profile.profile.name
   subnet_id       = aws_subnet.private_subnet.id
   security_groups = [aws_security_group.private_sg.id]
+  key_name = aws_key_pair.kp.key_name
+  user_data = "${file("./scripts/ansible.sh")}"
 
-  tags = {
+    tags = {
     Name = "ansible_master"
-  }
+       }
 }
 
 resource "aws_iam_role" "role" {

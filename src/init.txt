@@ -1,0 +1,31 @@
+//endpoint
+sudo mv /home/ubuntu/ken-linux-amd64/conf/kend_baobab.conf kend.conf
+sudo nano kend.conf
+kend start
+
+ken attach --datadir ~/data
+> klay.blockNumber
+> mainbridge.nodeInfo.kni
+
+"kni://0c8167f6951299383106c2f7d595bc44120002d192b294e272351f022e22c73620dcbe4674e323fe46e2c6f3a1cee32e9a586744c96b59b3d5422743dbb9c7b1@ec2-15-165-77-146.ap-northeast-2.compute.amazonaws.com:50505?discport=0"
+
+
+//**
+echo '["kni://0c8167f6951299383106c2f7d595bc44120002d192b294e272351f022e22c73620dcbe4674e323fe46e2c6f3a1cee32e9a586744c96b59b3d5422743dbb9c7b1@ec2-15-165-77-146.ap-northeast-2.compute.amazonaws.com:50505?discport=0"]' > ~/data/main-bridges.json
+
+//scn master or scn1~3
+sudo nano /home/ubuntu/homi-linux-amd64/bin/homi-output/scripts/static-nodes.json
+
+sudo scp -r -i wemade_defi.pem homi-output ubuntu@ec2-43-200-97-16.ap-northeast-2.compute.amazonaws.com:~/
+sudo scp -r -i wemade_defi.pem homi-output ubuntu@ec2-52-79-213-183.ap-northeast-2.compute.amazonaws.com:~/
+sudo scp -r -i wemade_defi.pem homi-output ubuntu@ec2-3-35-70-249.ap-northeast-2.compute.amazonaws.com:~/
+
+
+export PATH=$PATH:/home/ubuntu/kscn-linux-amd64/bin
+kscn --datadir ~/data init ~/homi-output/scripts/genesis.json
+cp ~/homi-output/scripts/static-nodes.json ~/data/
+sudo nano ~/kscn-linux-amd64/conf/kscnd.conf
+
+kscn attach --datadir ~/data
+> subbridge.peers.length
+> klay.blockNumber

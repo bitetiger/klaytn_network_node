@@ -19,14 +19,14 @@ resource "aws_route_table" "route_table" {
   }
 }
 
-resource "aws_main_route_table_association" "route_association" {
-  vpc_id         = aws_vpc.my_vpc.id
+resource "aws_route_table_association" "route_association" {
+  subnet_id      = aws_subnet.my_subnet.id
   route_table_id = aws_route_table.route_table.id
 }
 
 resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.2.0/24"
+  cidr_block        = "10.0.5.0/24"
   availability_zone = "ap-northeast-2a"
   map_public_ip_on_launch = true
   tags = {
@@ -50,6 +50,14 @@ resource "aws_security_group" "en_sg" {
    description = "SSH Access"
    from_port   = 22323
    to_port     = 22323
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
+ }
+
+   ingress {
+   description = "SSH Access"
+   from_port   = 22324
+   to_port     = 22324
    protocol    = "tcp"
    cidr_blocks = ["0.0.0.0/0"]
  }

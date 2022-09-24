@@ -1,10 +1,11 @@
 resource "aws_instance" "en_node" {
-  ami           = "ami-0d96fabb69923e576"
-  instance_type = "t2.micro"
+  ami           = "ami-058165de3b7202099"
+  instance_type = "t2.medium"
   subnet_id       = aws_subnet.my_subnet.id
   security_groups = [aws_security_group.en_sg.id]
   associate_public_ip_address = true
-  key_name = "wemade_seoul"
+  key_name = aws_key_pair.kp.key_name
+  user_data = "${file("./scripts/node_endpoint.sh")}"
 
     tags = {
     Name = "en_node"
