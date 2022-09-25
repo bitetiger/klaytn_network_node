@@ -7,7 +7,8 @@
   - Sevice Management, Monitoring/Alerting, Security, Automation, Configuration Management 다양한 관점 고려
 
 ## Description
-효율적인 블록체인 노드 운영을 위해서는 **빠른 인프라 구축**과 **모니터링을 통한 안정적인 운영**, **간편한 구성관리와 프로비저닝**이 요구됩니다. 이 세 가지를 중점으로 프로젝트를 진행했습니다
+효율적인 블록체인 노드 운영을 위해서는 **빠른 인프라 구축**과 **모니터링을 통한 안정적인 운영**, **간편한 구성관리와 프로비저닝**이 요구됩니다. 이 세 가지를 중점으로 프로젝트를 진행했습니다.
+![image](https://user-images.githubusercontent.com/89952061/192144312-1eeeebc3-6fc3-4765-960d-c59c2764415a.png)
 
 ### Built With
 - **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스 활용합니다.  
@@ -23,7 +24,6 @@
 - **Ansible** : AWS 환경에서 EC2의 Dynamic inventory 생성이 가능하여 노드의 업데이트와 구성관리, 프로비저닝이 가능합니다. Ansible_master 서버를 통해서 운영됩니다.
 
 ## Resource
-![image](https://user-images.githubusercontent.com/89952061/192144312-1eeeebc3-6fc3-4765-960d-c59c2764415a.png)
 
 ### Service chain node
 서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다.
@@ -80,7 +80,6 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 
 ## Test
 ### Service chain Node
-![image](https://user-images.githubusercontent.com/89952061/192144391-e0078065-5d71-401e-b84c-7dd447e5f49d.png)
 SCN-master 노드와 Endpoint node가 연결 완료된 상태입니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
 
 ![image](https://user-images.githubusercontent.com/89952061/192108402-f9282ff7-0ccd-4c33-a9c8-e8497e0b08a3.png)
