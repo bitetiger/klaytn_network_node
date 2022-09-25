@@ -60,14 +60,13 @@ Cloudwatch 경보 기능을 활용하여 노드의 CPU utilization가 상태 검
 1) Endpoint 노드를 통해서 노드 우회 접속
 2) https://ko.docs.klaytn.foundation/node/service-chain/getting-started/4nodes-setup-guide 2단계의 static-nodes.json 파일 수정 (모두 22323 port로 지정)
 3) ```$ scp -r -i {key-name.pem} ~/homi-linux-amd64/bin/homi-output/ {user}@{ip_address}:~/``` homi-output 파일을 scn-1, scn-2, scn-3에 전송
-4) ```$ export PATH=$PATH:/home/ubuntu/kscn-linux-amd64/bin```
-5) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 
-6) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
-7) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사 (scn-master = nodekey1 ... scn-3 = nodekey4)
-8) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
-9) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...``` (scn-1 ~ 3)
-10) ```... SC_SUB_BRIDGE=1, SC_PARENT_CHAIN_ID=1001, SC_ANCHORING_PERIOD=10, DATA_DIR=~/data ...```(scn-master)
-11) ```$ kscnd start``` scn노드 시작
+4) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 
+5) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
+6) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
+7) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
+8) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...``` (scn-1 ~ 3)
+9) ```... SC_SUB_BRIDGE=1, SC_PARENT_CHAIN_ID=1001, SC_ANCHORING_PERIOD=10, DATA_DIR=~/data ...```(scn-master)
+10) ```$ kscnd start``` 노드 시작
 
 ### Endpoint node
 1) ken 디렉토리에서 kend_baobab.conf 파일을 kend.conf로 수정
@@ -78,7 +77,7 @@ Cloudwatch 경보 기능을 활용하여 노드의 CPU utilization가 상태 검
 
 ### Ansible
 1) Endpoint 노드를 통해서 Ansible 서버 우회 접속
-2) ```$ sudo ansible-playbook ping_playbook.yml```으로 ping 테스트
+2) ```mv ~/ansible.cfg /etc/ansible/ansible.cfg ``` ansible.cfg 이동하여 설정변경
 
 ### Grafana server
 1) 해당 EC2의 Public_DNS 주소의 Port 3000번으로 Grafana 어플리케이션 접속 (id : admin, pw : admin)
