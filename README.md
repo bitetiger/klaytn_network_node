@@ -53,12 +53,12 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 ### Service chain node
 1) Endpoint 노드를 통해서 노드 우회 접속
 2) ```$ scp -r -i {key-name.pem} ~/homi-linux-amd64/bin/homi-output/ {user}@{ip_address}:~/``` homi-output 파일을 scn-1, scn-2, scn-3에 전송
-3) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
-4) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
-5) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
-6) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
-7) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
-8) ```$ export PATH=$PATH:/home/ubuntu/kscn-linux-amd64/bin```
+3) ```$ export PATH=$PATH:/home/ubuntu/kscn-linux-amd64/bin```
+4) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
+5) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
+6) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
+7) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
+8) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
 9) ```$ kscnd start``` scn노드 시작
 
 ### Endpoint node
