@@ -8,7 +8,6 @@
 
 ## Description
 효율적인 블록체인 노드 운영을 위해서는 **빠른 인프라 구축**과 **모니터링을 통한 안정적인 운영**, **간편한 구성관리와 프로비저닝**이 요구됩니다. 이 세 가지를 중점으로 프로젝트를 진행했습니다
-![image](https://user-images.githubusercontent.com/89952061/192111327-301e9d11-c4eb-47e9-8f0b-1bc31a584a61.png)
 
 ### Built With
 - **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스 활용합니다.  
@@ -24,16 +23,18 @@
 - **Ansible** : AWS 환경에서 EC2의 Dynamic inventory 생성이 가능하여 노드의 업데이트와 구성관리, 프로비저닝이 가능합니다. Ansible_master 서버를 통해서 운영됩니다.
 
 ## Resource
+![image](https://user-images.githubusercontent.com/89952061/192144312-1eeeebc3-6fc3-4765-960d-c59c2764415a.png)
+
 ### Service chain node
-서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. SCN-master는 Private subnet에 위치한 ansible 서버의 bastion host이며, 동시에 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다.
+서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
-* Public subnet
+* Private subnet
 
 ### Endpoint node
-EN-node 1개가 운영되며 klaytn 블록체인 데이터를 동기화하고 받은 블록을 검증합니다. SCN-master 노드와 1:1로 연결됩니다.
+EN-node 1개가 운영되며 klaytn 블록체인 데이터를 동기화하고 받은 블록을 검증합니다. Endpoint node는 Private subnet에 위치한 ansible 서버와 Service chain node의 bastion host이며, SCN-master 노드와 1:1로 연결됩니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
 * EBS : 100 GiB
-* Private subnet
+* Public subnet
 
 ### Ansible Server (Configuration Management)
 Ansible_master 서버는 AWS에서 가동되는 모든 EC2를 자동으로 등록하여 노드의 상태 확인 및 간편한 환경설정과 프로비저닝이 가능합니다. 전체 노드를 컨트롤하는 만큼 Private subnet에 설치하여 외부의 접근이 불가능합니다.
@@ -50,14 +51,15 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 2) 노드와 특정 서버들의 환경설정 진행
 
 ### Service chain node
-1) ```$ scp -r -i {key-name.pem} ~homi-linux-amd64/bin/homi-output/ {user}@{ip_address}:~/``` homi-output 파일을 scn-1, scn-2, scn-3에 전송
-2) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
-3) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
-4) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
-5) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
-6) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
-7) ```$ export PATH=$PATH:/home/ec2-user/kscn-linux-amd64/bin```
-8) ```$ kscnd start``` scn노드 시작
+1) Endpoint 노드를 통해서 노드 우회 접속
+2) ```$ scp -r -i {key-name.pem} ~homi-linux-amd64/bin/homi-output/ {user}@{ip_address}:~/``` homi-output 파일을 scn-1, scn-2, scn-3에 전송
+3) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
+4) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
+5) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
+6) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
+7) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
+8) ```$ export PATH=$PATH:/home/ec2-user/kscn-linux-amd64/bin```
+9) ```$ kscnd start``` scn노드 시작
 
 ### Endpoint node
 1) ken 디렉토리에서 kend_baobab.conf 파일을 kend.conf로 수정
@@ -67,7 +69,7 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 5) ```$ kend start``` 노드 시작
 
 ### Ansible
-1) SCN-master 노드를 통해서 Ansible 서버 우회 접속
+1) Endpoint 노드를 통해서 Ansible 서버 우회 접속
 2) ```$ ansible-playbook ping-playbook.yml```으로 ping 테스트
 
 ### Grafana server
@@ -78,7 +80,7 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 
 ## Test
 ### Service chain Node
-![image](https://user-images.githubusercontent.com/89952061/192108347-ef6cf625-5b1a-4512-807c-273805ca45e9.png)
+![image](https://user-images.githubusercontent.com/89952061/192144391-e0078065-5d71-401e-b84c-7dd447e5f49d.png)
 SCN-master 노드와 Endpoint node가 연결 완료된 상태입니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
 
 ![image](https://user-images.githubusercontent.com/89952061/192108402-f9282ff7-0ccd-4c33-a9c8-e8497e0b08a3.png)
