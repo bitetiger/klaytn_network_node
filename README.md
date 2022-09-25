@@ -72,7 +72,7 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 
 ### Ansible
 1) Endpoint 노드를 통해서 Ansible 서버 우회 접속
-2) ```$ ansible-playbook ping-playbook.yml```으로 ping 테스트
+2) ```$ ansible-playbook ping_playbook.yml```으로 ping 테스트
 
 ### Grafana server
 1) 해당 EC2의 Public_DNS 주소의 Port 3000번으로 Grafana 어플리케이션 접속
