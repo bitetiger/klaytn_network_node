@@ -98,4 +98,4 @@ ansible에서 AWS에서 가동 중인 EC2 서버를이 인벤토리에 동적으
 
 ### Grafana Monitoring
 ![image](https://user-images.githubusercontent.com/89952061/192151576-e4b33e78-34e6-4569-804f-a262b9f5f2d0.png)
-주요 aws 리소스들의 메트릭/로그를 시각화한 화면입니다. 위 대시보드는 EC2의 public_dns:3000에 접속하여 확인할 수 있습니다.
+주요 aws 리소스들의 메트릭/로그를 시각화한 화면입니다. 위 대시보드는 Grafana EC2의 public_dns:3000에 접속하여 확인할 수 있습니다.
