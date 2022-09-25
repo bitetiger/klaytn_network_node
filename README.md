@@ -41,7 +41,7 @@ Ansible_master 서버는 AWS에서 가동되는 모든 EC2를 자동으로 등�
 * Private subnet
 
 ### Grafana Server (Monitoring)
-Grafana-EC2 1개
+Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클라우드 리소스의 메트릭/로그를 시각화합니다. 노드들의 CPU utilization, 네트워크 현황과 상태 체크 등을 확인할 수 있습니다.
 * EC2 : Ubuntu 22.04 LTS, t2.micro
 * Public subnet
 
