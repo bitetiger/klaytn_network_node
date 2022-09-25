@@ -8,7 +8,6 @@
 
 ## Description
 효율적인 블록체인 노드 운영을 위해서는 **빠른 인프라 구축**과 **모니터링을 통한 안정적인 운영**, **간편한 구성관리와 프로비저닝**이 요구됩니다. 이 세 가지를 중점으로 프로젝트를 진행했습니다.
-![image](https://user-images.githubusercontent.com/89952061/192144312-1eeeebc3-6fc3-4765-960d-c59c2764415a.png)
 
 ### Built With
 - **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스 활용합니다.  
@@ -24,9 +23,9 @@
 - **Ansible** : AWS 환경에서 EC2의 Dynamic inventory 생성이 가능하여 노드의 업데이트와 구성관리, 프로비저닝이 가능합니다. Ansible_master 서버를 통해서 운영됩니다.
 
 ## Resource
-
+![image](https://user-images.githubusercontent.com/89952061/192144312-1eeeebc3-6fc3-4765-960d-c59c2764415a.png)
 ### Service chain node
-서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다.
+서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다. 서비스 체인의 보안을 위해 private subnet에 구축되었으며, Endpoint node가 서비스 체인에 접속할 수 있는 bastion host입니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
 * Private subnet
 
@@ -42,7 +41,7 @@ Ansible_master 서버는 AWS에서 가동되는 모든 EC2를 자동으로 등�
 * Private subnet
 
 ### Grafana Server (Monitoring)
-Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클라우드 리소스의 메트릭/로그를 시각화합니다. 노드들의 CPU utilization, 네트워크 현황과 상태 체크 등을 확인할 수 있습니다.
+Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클라우드 리소스의 메트릭/로그를 시각화합니다. 노드들의 CPU utilization, 네트워크 현황과 상태 체크 등을 확인할 수 있습니다. 브라우저를 통해 모니터링 서버에 접속할 수 있어야하기 때문에 Endpoint server와 public subnet 구성을 달리하였습니다.
 * EC2 : Ubuntu 22.04 LTS, t2.micro
 * Public subnet
 
