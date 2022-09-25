@@ -75,7 +75,7 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 2) ```$ sudo ansible-playbook ping_playbook.yml```으로 ping 테스트
 
 ### Grafana server
-1) 해당 EC2의 Public_DNS 주소의 Port 3000번으로 Grafana 어플리케이션 접속
+1) 해당 EC2의 Public_DNS 주소의 Port 3000번으로 Grafana 어플리케이션 접속 (id : admin, pw : admin)
 2) Configuration -> Plugin -> Cloudwatch -> ```Create a CloudWatch data source``` 클릭
 3) AWS Access key와 Secret key 설정을 통해서 데이터 리소스 생성
 4) repo의 src/grafana_dashboard.json 을 활용해서 대시보드 
