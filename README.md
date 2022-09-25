@@ -34,7 +34,7 @@
 ### Endpoint node
 EN-node 1개가 운영되며 klaytn 블록체인 데이터를 동기화하고 받은 블록을 검증합니다. Endpoint node는 Private subnet에 위치한 ansible 서버와 Service chain node의 bastion host이며, SCN-master 노드와 1:1로 연결됩니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
-* EBS : 100 GiB
+* EBS : 200 GiB
 * Public subnet
 
 ### Ansible Server (Configuration Management)
