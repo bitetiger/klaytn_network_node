@@ -45,35 +45,56 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 * EC2 : Ubuntu 22.04 LTS, t2.micro
 * Public subnet
 
-## Usages
+## Get started
 1) Terraform을 사용하여 AWS의 전체 인프라 리소스 생성
 2) 노드와 특정 서버들의 환경설정 진행
--  Endpoint node
-    - asdsada
--  Service chain node 
-    - adsadasd
--  grafana server
-    - adsadasd
--  ansible server
-    - adsadasd
 
+### Service chain node
+1) ```$ scp -r -i {key-name.pem} ~homi-linux-amd64/bin/homi-output/ {user}@{ip_address}:~/``` homi-output 파일을 scn-1, scn-2, scn-3에 전송
+2) ```$ $ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
+3) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
+4) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
+5) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
+6) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
+7) ```$ export PATH=$PATH:/home/ec2-user/kscn-linux-amd64/bin```
+8) ```$ kscnd start``` scn노드 시작
+
+### Endpoint node
+1) ken 디렉토리에서 kend_baobab.conf 파일을 kend.conf로 수정
+2) kend.conf 내용을 아래와 같이 설정 
+3) ``` ... SC_MAIN_BRIDGE=1, DATA_DIR=~/data ...```
+4) ```$ export PATH=$PATH:/home/ec2-user/ken-linux-amd64/bin```
+5) ```$ kend start``` 노드 시작
+
+### Ansible
+1) SCN-master 노드를 통해서 Ansible 서버 우회 접속
+2) ```$ ansible-playbook ping-playbook.yml```으로 ping 테스트
+
+### Grafana server
+1) 해당 EC2의 Public_DNS 주소의 Port 3000번으로 Grafana 어플리케이션 접속
+2) Configuration -> Plugin -> Cloudwatch -> ```Create a CloudWatch data source``` 클릭
+3) AWS Access key와 Secret key 설정을 통해서 데이터 리소스 생성
+4) repo의 src/grafana_dashboard.json 을 활용해서 대시보드 
 
 ## Test
-### Endpoint Node
-![image](https://user-images.githubusercontent.com/89952061/192108433-d0d77752-2f7d-4315-a321-60195c44d9cb.png)
-
 ### Service chain Node
 ![image](https://user-images.githubusercontent.com/89952061/192108347-ef6cf625-5b1a-4512-807c-273805ca45e9.png)
-EN과 연결 확인
+SCN-master 노드와 Endpoint node가 연결 완료된 상태입니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
+
 ![image](https://user-images.githubusercontent.com/89952061/192108402-f9282ff7-0ccd-4c33-a9c8-e8497e0b08a3.png)
-Layer 2의 블록 생성 확인
+서비스 체인들의 블록 생성이 진행되고 있는 것을 확인할 수 있습니다.
+
+### Endpoint Node
+![image](https://user-images.githubusercontent.com/89952061/192108433-d0d77752-2f7d-4315-a321-60195c44d9cb.png)
+클레이튼 네트워크의 블록이 안정적으로 수집, 저장되고 있는 것을 확인할 수 있습니다.
 
 ### Ansible master
 ![image](https://user-images.githubusercontent.com/89952061/192129689-1cfcecd1-4e49-4ba5-b65d-c4d827bc1c9e.png)
-ansible에서 전체 ec2 노드 할당 성공
+ansible에서 AWS에서 가동 중인 EC2 서버를이 인벤토리에 동적으로 할당되었습니다.
+
 ![image](https://user-images.githubusercontent.com/89952061/192130567-d7c98d5b-5d3c-496d-8643-caf916f191f5.png)
-전체 ec2 노드 ping 전송 테스트 성공
+EC2 서버에 ping 전송 테스트를 진행하여 ansible control node와 연결이 정상적인 것을 확인할 수 있습니다.
 
 ### Grafana Monitoring
 ![image](https://user-images.githubusercontent.com/89952061/192111171-8f65b1a8-cd66-4f89-955d-7af511c8fd24.png)
-
+주요 aws 리소스들의 메트릭/로그를 시각화한 화면입니다. 위 대시보드는 EC2의 public_dns:3000에 접속하여 확인할 수 있습니다.
