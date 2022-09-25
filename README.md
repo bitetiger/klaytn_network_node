@@ -47,6 +47,11 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 * EC2 : Ubuntu 22.04 LTS, t2.micro
 * Public subnet
 
+### CloudWatch
+Cloudwatch 경보 기능을 활용하여 노드의 CPU utilization가 상태 검사를 체크하고 확인합니다. 일정 기준을 초과한 경우, 지정된 SNS 주제로 경보 메시지 전달과 조치를 취합니다.  
+- CPU utilization이 일정기준 초과 시, 지정 SNS로 경보 메시지 전달  
+- 인스턴스 상태 체크 실패 시, 지정 SNS 경보 메시지 전달 및 인스턴스 재부팅
+
 ## Get started
 1) Terraform을 사용하여 AWS의 전체 인프라 리소스 생성
 2) 노드와 특정 서버들의 환경설정 진행
