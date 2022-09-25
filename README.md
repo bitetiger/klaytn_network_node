@@ -48,7 +48,7 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 * Public subnet
 
 ### CloudWatch
-Cloudwatch 경보 기능을 활용하여 노드의 CPU utilization가 상태 검사를 체크하고 확인합니다. 일정 기준을 초과한 경우, 지정된 SNS 주제로 경보 메시지 전달과 조치를 취합니다.  
+Cloudwatch Alert 기능을 활용하여 노드의 CPU utilization가 상태 검사를 체크하고 확인합니다. 일정 기준을 초과한 경우, 지정된 SNS 주제로 경보 메시지 전달과 조치를 취합니다.  
 - CPU utilization이 일정기준 초과 시, 지정 SNS로 경보 메시지 전달  
 - 인스턴스 상태 체크 실패 시, 지정 SNS 경보 메시지 전달 및 인스턴스 재부팅
 
@@ -110,3 +110,7 @@ ansible에서 AWS에서 가동 중인 EC2 서버를이 인벤토리에 동적으
 ### Grafana Monitoring
 ![image](https://user-images.githubusercontent.com/89952061/192151576-e4b33e78-34e6-4569-804f-a262b9f5f2d0.png)
 주요 aws 리소스들의 메트릭/로그를 시각화한 화면입니다. 위 대시보드는 Grafana EC2의 public_dns:3000에 접속하여 확인할 수 있습니다.
+
+### CloudWatch 
+![image](https://user-images.githubusercontent.com/89952061/192171228-bbd8cfa9-aa68-4251-829c-90f0f1d1f23f.png)
+가동 중인 노드들의 CPU utilization과 Instance 상태에 따라 Alert 메시지와 함께 설정된 조치가 취해집니다.
