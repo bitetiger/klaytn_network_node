@@ -82,10 +82,11 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 
 ## Test
 ### Service chain Node
-SCN-master 노드와 Endpoint node가 연결 완료된 상태입니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
+![image](https://user-images.githubusercontent.com/89952061/192149074-d1566f10-25d6-489b-b37c-45cb811f8b32.png)
+subbridge.peers.length 명령을 통해 SCN-master 노드와 Endpoint node가 연결이 완료된 상태인 것을 알 수 있습니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
 
-![image](https://user-images.githubusercontent.com/89952061/192108402-f9282ff7-0ccd-4c33-a9c8-e8497e0b08a3.png)
-서비스 체인들의 블록 생성이 진행되고 있는 것을 확인할 수 있습니다.
+![image](https://user-images.githubusercontent.com/89952061/192149149-e15c2690-7c8e-4916-a9a7-d39274ec4f0b.png)
+klay.blockNumber를 통해서 서비스 체인들의 블록 생성이 진행되고 있는 것을 확인할 수 있습니다.
 
 ### Endpoint Node
 ![image](https://user-images.githubusercontent.com/89952061/192147421-a7490c4e-c930-42c4-bac3-b4cfe5ceb1e2.png)
