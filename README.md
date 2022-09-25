@@ -25,7 +25,7 @@
 - **Ansible** : AWS 환경에서 EC2의 Dynamic inventory 생성이 가능하여 노드의 업데이트와 구성관리, 프로비저닝이 가능합니다. Ansible_master 서버를 통해서 운영됩니다.
 
 ## Resource
-![image](https://user-images.githubusercontent.com/89952061/192144312-1eeeebc3-6fc3-4765-960d-c59c2764415a.png)
+![image](https://user-images.githubusercontent.com/89952061/192152887-4922f3f0-45e1-4d4a-b5e8-bd33fe143bef.png)
 ### Service chain node
 서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다. 서비스 체인의 보안을 위해 private subnet에 구축되었으며, Endpoint node가 서비스 체인에 접속할 수 있는 bastion host입니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
