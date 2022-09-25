@@ -4,3 +4,4 @@ test.txt
 scn.txt
 terraform.tfstate.backup
 .terraform.lock.hcl
+wemade_defi.pem
