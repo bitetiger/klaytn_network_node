@@ -58,14 +58,14 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 5) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
 6) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
 7) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
-8) ```$ export PATH=$PATH:/home/ec2-user/kscn-linux-amd64/bin```
+8) ```$ export PATH=$PATH:/home/ubuntu/kscn-linux-amd64/bin```
 9) ```$ kscnd start``` scn노드 시작
 
 ### Endpoint node
 1) ken 디렉토리에서 kend_baobab.conf 파일을 kend.conf로 수정
 2) kend.conf 내용을 아래와 같이 설정 
 3) ``` ... SC_MAIN_BRIDGE=1, DATA_DIR=~/data ...```
-4) ```$ export PATH=$PATH:/home/ec2-user/ken-linux-amd64/bin```
+4) ```$ export PATH=$PATH:/home/ubuntu/ken-linux-amd64/bin```
 5) ```$ kend start``` 노드 시작
 
 ### Ansible
