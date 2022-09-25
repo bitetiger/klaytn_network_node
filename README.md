@@ -93,12 +93,9 @@ klay.blockNumber를 통해서 서비스 체인들의 블록 생성이 진행되�
 klay.blockNumber를 통해서 클레이튼 네트워크의 블록이 안정적으로 동기화되고 있는 것을 확인할 수 있습니다.
 
 ### Ansible master
-![image](https://user-images.githubusercontent.com/89952061/192129689-1cfcecd1-4e49-4ba5-b65d-c4d827bc1c9e.png)
+![image](https://user-images.githubusercontent.com/89952061/192151725-e46cb80f-8e4a-40b9-8ab9-f8c1dc5961bf.png)
 ansible에서 AWS에서 가동 중인 EC2 서버를이 인벤토리에 동적으로 할당되었습니다.
 
-![image](https://user-images.githubusercontent.com/89952061/192130567-d7c98d5b-5d3c-496d-8643-caf916f191f5.png)
-EC2 서버에 ping 전송 테스트를 진행하여 ansible control node와 연결이 정상적인 것을 확인할 수 있습니다.
-
 ### Grafana Monitoring
-![image](https://user-images.githubusercontent.com/89952061/192111171-8f65b1a8-cd66-4f89-955d-7af511c8fd24.png)
+![image](https://user-images.githubusercontent.com/89952061/192151576-e4b33e78-34e6-4569-804f-a262b9f5f2d0.png)
 주요 aws 리소스들의 메트릭/로그를 시각화한 화면입니다. 위 대시보드는 EC2의 public_dns:3000에 접속하여 확인할 수 있습니다.
