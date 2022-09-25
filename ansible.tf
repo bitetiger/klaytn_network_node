@@ -8,7 +8,7 @@ resource "aws_instance" "ansible" {
   user_data = "${file("./scripts/ansible.sh")}"
 
     tags = {
-    Name = "ansible_master"
+    Name = "ansible"
        }
 }
 

@@ -18,9 +18,16 @@ resource "aws_instance" "scn-master" {
     destination = "/home/ubuntu/${aws_key_pair.kp.key_name}.pem"
        }
 
+   provisioner "file" {
+    source      = "./src/inventory_aws_ec2.yml"
+    destination = "/home/ubuntu/inventory_aws_ec2.yml"
+       }
+
     provisioner "remote-exec" {
         inline = [
             "cd /home/ubuntu",
+            "sudo scp -r -i ${aws_key_pair.kp.key_name} inventory_aws_ec2.yml ubuntu@${aws_instance.ansible.public_dns}:~/",
+            "sudo scp -r -i ${aws_key_pair.kp.key_name} ${aws_key_pair.kp.key_name} ubuntu@${aws_instance.ansible.public_dns}:~/",
             "wget https://packages.klaytn.net/klaytn/v1.9.0/kscn-v1.9.0-0-linux-amd64.tar.gz",
             "tar xvf kscn-v1.9.0-0-linux-amd64.tar.gz",
             "export PATH=$PATH:~/kscn-v1.9.0-0-linux-amd64/bin",
@@ -90,4 +97,16 @@ resource "aws_eip_association" "scn" {
   count         = 3
   instance_id   = aws_instance.sc_node[count.index].id
   allocation_id = aws_eip.scn[count.index].id
+}
+
+resource "aws_eip" "scn_m_eip" {
+  vpc   = true
+  tags = {
+    Name = "scn-master"
+  }
+}
+
+resource "aws_eip_association" "scn_m_eip_asso" {
+  instance_id   = aws_instance.scn-master.id
+  allocation_id = aws_eip.scn_m_eip.id
 }

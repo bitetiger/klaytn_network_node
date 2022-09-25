@@ -10,7 +10,7 @@ resource "aws_nat_gateway" "nat_gateway_1" {
   allocation_id = aws_eip.nat_1.id
 
   # public subnet을 연결
-  subnet_id = aws_subnet.grafana_subnet.id
+  subnet_id = aws_subnet.my_subnet.id
   tags = {
     Name = "NAT-GW-1"
   }

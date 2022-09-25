@@ -1,6 +1,7 @@
 //endpoint
 sudo mv /home/ubuntu/ken-linux-amd64/conf/kend_baobab.conf kend.conf
 sudo nano kend.conf
+export PATH=$PATH:/home/ubuntu/ken-linux-amd64/bin
 kend start
 
 ken attach --datadir ~/data
