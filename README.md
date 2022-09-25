@@ -59,8 +59,9 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 6) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
 7) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사 (scn-master = nodekey1 ... scn-3 = nodekey4)
 8) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
-9) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...```
-10) ```$ kscnd start``` scn노드 시작
+9) ```... PORT=22323, SC_SUB_BRIDGE=0, DATA_DIR=~/data...``` (scn-1 ~ 3)
+10) ```... SC_SUB_BRIDGE=1, SC_PARENT_CHAIN_ID=1001, SC_ANCHORING_PERIOD=10 ...```(scn-master)
+11) ```$ kscnd start``` scn노드 시작
 
 ### Endpoint node
 1) ken 디렉토리에서 kend_baobab.conf 파일을 kend.conf로 수정
