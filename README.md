@@ -11,44 +11,51 @@
 ![image](https://user-images.githubusercontent.com/89952061/192111327-301e9d11-c4eb-47e9-8f0b-1bc31a584a61.png)
 
 ### Built With
-- **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스 활용합니다.
-- **Terraform** : 코드를 통해 노드 구축에 요구되는 AWS 인프라를 빠르게 구성하고 효율적으로 관리할 수 있습니다. 아래는 Terraform을 통해 구축되는 인프라 단계입니다.
+- **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스 활용합니다.  
 
-- **Grafana** : 다양한 클라우드 리소스의 메트릭/로그 시각화와 알림을 통해 안정적인 노드 모니터링을 지원합니다. Grafana-EC2 서버를 통해서 운영됩니다. pulic_dns:3000을 브라우저를 통해 접속 시 인터페이스 확인이 가능합니다.
+- **Terraform** : 코드를 통해 노드 구축에 요구되는 AWS 인프라를 빠르게 구성하고 효율적으로 관리할 수 있습니다. Terraform을 통해 아래와 같이 리소스 구성과 환경구성이 완료됩니다. 
+  - [x] EC2, VPC, Subnet, Nat gateway, Security Group 등 아키텍처 전반의 인프라 구성 완료
+  - [x] Service chain node, Endpoint node 구성을 위한 패키지(kscn, homi, ken) 설치 완료
+  - [x] Service chain node 설정을 위한 genesis.json, nodekey 파일 생성 완료
+  - [x] Endpoint node의 genesis.json 생성 및 노드 초기화 완료 
+  - [x] 환경 구성를 위한 Ansible 설치 및 AWS EC2 Dynamic Inventory와 ping test를 위한 Playbook 생성 및 설정 완료
+  - [x] 모니터링을 위한 Grafana 설치 및 가동 완료
+- **Grafana** : 다양한 클라우드 리소스의 메트릭/로그 시각화와 알림을 통해 안정적인 노드 모니터링을 지원합니다. Grafana-EC2 서버를 통해서 운영됩니다. pulic_dns:3000을 브라우저를 통해 접속 시 대시보드 확인이 가능합니다.
 - **Ansible** : AWS 환경에서 EC2의 Dynamic inventory 생성이 가능하여 노드의 업데이트와 구성관리, 프로비저닝이 가능합니다. Ansible_master 서버를 통해서 운영됩니다.
 
 ## Resource
 ### Service chain node
-SCN-master, SCN-1, SCN-2, SCN-3로 총 4개
+서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. SCN-master는 Private subnet에 위치한 ansible 서버의 bastion host이며, 동시에 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
 * Public subnet
 
 ### Endpoint node
-EN-node 1개
+EN-node 1개가 운영되며 klaytn 블록체인 데이터를 동기화하고 받은 블록을 검증합니다. SCN-master 노드와 1:1로 연결됩니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
 * EBS : 100 GiB
 * Private subnet
 
-### Configuration Management(Ansible)
-Ansible_master 서버를 통해서 AWS에서 가동되는 모든 EC2의 환경설정과 프로비저닝이 가능합니다. 가동되는 모든 노드들의 상태 확인과 더불어 효율적인 구성관리가 가능합니다.
+### Ansible Server (Configuration Management)
+Ansible_master 서버는 AWS에서 가동되는 모든 EC2를 자동으로 등록하여 노드의 상태 확인 및 간편한 환경설정과 프로비저닝이 가능합니다. 전체 노드를 컨트롤하는 만큼 Private subnet에 설치하여 외부의 접근이 불가능합니다.
 * EC2 : Ubuntu 22.04 LTS, t2.medium
 * Private subnet
 
-### Monitoring(Grafana)
+### Grafana Server (Monitoring)
 Grafana-EC2 1개
 * EC2 : Ubuntu 22.04 LTS, t2.micro
 * Public subnet
 
-## Get Started
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+## Usages
+1) Terraform을 사용하여 AWS의 전체 인프라 리소스 생성
+2) 노드와 특정 서버들의 환경설정 진행
+-  Endpoint node
+    - asdsada
+-  Service chain node 
+    - adsadasd
+-  grafana server
+    - adsadasd
+-  ansible server
+    - adsadasd
 
 
 ## Test
