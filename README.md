@@ -86,17 +86,23 @@ Cloudwatch 경보 기능을 활용하여 노드의 CPU utilization가 상태 검
 3) AWS Access key와 Secret key 설정을 통해서 데이터 리소스 생성
 4) repo의 src/grafana_dashboard.json 을 활용해서 대시보드 
 
-## Test
+## 구현 화면
 ### Service chain Node
 ![image](https://user-images.githubusercontent.com/89952061/192149074-d1566f10-25d6-489b-b37c-45cb811f8b32.png)
-subbridge.peers.length 명령을 통해 SCN-master 노드와 Endpoint node가 연결이 완료된 상태인 것을 알 수 있습니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
+SCN-master 노드에서 subbridge.peers.length 명령을 통해 SCN-master 노드와 Endpoint node가 연결이 완료된 상태인 것을 알 수 있습니다. Endpoint node를 통해서 데이터 앵커링이 가능해집니다.
+
+![image](https://user-images.githubusercontent.com/89952061/192156725-131c6263-1c84-4c07-b2d5-63c72300f228.png)
+SCN-master 노드의 kscnd.out 로그입니다. 새로운 블록이 생성되고 커밋되는 상태를 확인할 수 있습니다.
 
 ![image](https://user-images.githubusercontent.com/89952061/192149149-e15c2690-7c8e-4916-a9a7-d39274ec4f0b.png)
-klay.blockNumber를 통해서 서비스 체인의 블록 생성이 진행되고 있는 것을 확인할 수 있습니다.
+SCN-1 노드에서 klay.blockNumber 명령을 통해서 서비스 체인의 블록 생성이 진행되고 있는 것을 확인할 수 있습니다.
 
 ### Endpoint Node
 ![image](https://user-images.githubusercontent.com/89952061/192147421-a7490c4e-c930-42c4-bac3-b4cfe5ceb1e2.png)
-klay.blockNumber를 통해서 클레이튼 네트워크의 블록이 안정적으로 동기화되고 있는 것을 확인할 수 있습니다.
+Endpoint 노드에서 klay.blockNumber 명령으로 클레이튼 네트워크의 블록이 안정적으로 동기화되고 있는 것을 확인할 수 있습니다.
+
+![image](https://user-images.githubusercontent.com/89952061/192156833-46c17a09-885a-43f7-bb48-3c4efd739cdf.png)
+kend.out 로그를 확인하여 메인넷의 블록을 빠르게 동기화하고 있는 것을 확인할 수 있습니다.
 
 ### Ansible master
 ![image](https://user-images.githubusercontent.com/89952061/192151725-e46cb80f-8e4a-40b9-8ab9-f8c1dc5961bf.png)
