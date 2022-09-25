@@ -10,4 +10,3 @@ sudo apt install python3.8 -y
 sudo apt-get install python3-pip -y
 pip3 install boto3
 cd /home/ubuntu
-wget https://drive.google.com/file/d/1U4E0xySGfiLGtvAUHGIcjoSMrZUBESxE/view?usp=sharing

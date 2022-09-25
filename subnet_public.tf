@@ -37,43 +37,35 @@ resource "aws_security_group" "en_sg" {
   name        = "en_sg"
   vpc_id      = aws_vpc.my_vpc.id
   description = "SSH from Anywhere"
-
+/* 
  ingress {
    description = "HTTP Access"
    from_port   = 80
    to_port     = 80
    protocol    = "tcp"
    cidr_blocks = ["0.0.0.0/0"]
+ } */
+
+   ingress {
+   description = "node Access"
+   from_port   = 50505
+   to_port     = 50505
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
  }
 
   ingress {
-   description = "SSH Access"
-   from_port   = 22323
-   to_port     = 22323
+   description = "node Access"
+   from_port   = 50506
+   to_port     = 50506
    protocol    = "tcp"
    cidr_blocks = ["0.0.0.0/0"]
  }
 
-   ingress {
-   description = "SSH Access"
-   from_port   = 22324
-   to_port     = 22324
-   protocol    = "tcp"
-   cidr_blocks = ["0.0.0.0/0"]
- }
- 
  ingress {
    description = "SSH Access"
    from_port   = 22
    to_port     = 22
-   protocol    = "tcp"
-   cidr_blocks = ["0.0.0.0/0"]
- }
-
-  ingress {
-   description = "endpoint Access"
-   from_port   = 50505
-   to_port     = 50505
    protocol    = "tcp"
    cidr_blocks = ["0.0.0.0/0"]
  }

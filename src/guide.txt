@@ -76,4 +76,3 @@ subbridge.peers.length
 //endpoint node
 ken attach --datadir ~/data
 mainbridge.nodeInfo.kni
-

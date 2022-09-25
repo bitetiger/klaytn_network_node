@@ -1,6 +1,6 @@
-resource "aws_instance" "grafana-ec2-final" {
+resource "aws_instance" "grafana-ec2" {
   ami           = "ami-058165de3b7202099" # ap-northeast-2 Ubuntu 22.04 (LTS)
-  instance_type = "t2.medium"
+  instance_type = "t2.micro"
   subnet_id = aws_subnet.grafana_subnet.id
   key_name = aws_key_pair.kp.key_name
 
@@ -9,7 +9,7 @@ resource "aws_instance" "grafana-ec2-final" {
   user_data = "${file("./scripts/grafana.sh")}"
 
   tags = {
-    Name = "grafana-ec2-final"
+    Name = "grafana-ec2"
   }
 }
 

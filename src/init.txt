@@ -30,3 +30,7 @@ sudo nano ~/kscn-linux-amd64/conf/kscnd.conf
 kscn attach --datadir ~/data
 > subbridge.peers.length
 > klay.blockNumber
+
+
+
+sudo scp -r -i wemade_defi.pem wemade_defi.pem ubuntu@ec2-43-200-253-59.ap-northeast-2.compute.amazonaws.com:~/

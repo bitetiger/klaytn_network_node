@@ -1,0 +1,12 @@
+- name: touch files test
+  hosts: all
+  tasks:
+     - name: ken restart
+        file:
+           path: /home/deploy/touch_files
+           state: directory
+           
+     - name: touch file
+        file:
+           path: /home/deploy/touch_files/test.txt
+           state: touch

@@ -55,6 +55,22 @@ resource "aws_security_group" "private_sg" {
    protocol    = "tcp"
    cidr_blocks = ["0.0.0.0/0"]
  }
+
+   ingress {
+   description = "node Access"
+   from_port   = 22324
+   to_port     = 22324
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
+ }
+
+  ingress {
+   description = "node Access"
+   from_port   = 22323
+   to_port     = 22323
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
+ }
  
  egress {
    from_port   = 0
