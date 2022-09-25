@@ -10,7 +10,7 @@
 
 ## Endpoint Node
 ![image](https://user-images.githubusercontent.com/89952061/192108433-d0d77752-2f7d-4315-a321-60195c44d9cb.png)
-ansible에서 전체 ec2 노드 할당 성공
+
 
 ## Service chain Node
 ![image](https://user-images.githubusercontent.com/89952061/192108347-ef6cf625-5b1a-4512-807c-273805ca45e9.png)
@@ -20,7 +20,7 @@ Layer 2의 블록 생성 확인
 
 ## Ansible master
 ![image](https://user-images.githubusercontent.com/89952061/192129689-1cfcecd1-4e49-4ba5-b65d-c4d827bc1c9e.png)
-
+ansible에서 전체 ec2 노드 할당 성공
 
 ## Grafana Monitoring
 ![image](https://user-images.githubusercontent.com/89952061/192111171-8f65b1a8-cd66-4f89-955d-7af511c8fd24.png)
