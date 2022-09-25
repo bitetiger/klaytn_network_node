@@ -51,7 +51,7 @@ Grafana-EC2 1개로 운영되며 AWS Cloud watch 플러그인을 통해서 클�
 
 ### Service chain node
 1) ```$ scp -r -i {key-name.pem} ~homi-linux-amd64/bin/homi-output/ {user}@{ip_address}:~/``` homi-output 파일을 scn-1, scn-2, scn-3에 전송
-2) ```$ $ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
+2) ```$ kscn --datadir ~/data init ~/homi-output/scripts/genesis.json``` 노드 초기화 (scn-1, scn-2, scn-3만 진행)
 3) ```$ cp ~/homi-output/scripts/static-nodes.json ~/data/``` static-nodes.json 파일을 data 폴더에 복사
 4) ```$ cp ~/homi-output/keys/nodekey{1..4} ~/data/klay/nodekey``` 각 노드에 nodekey를 data 폴더에 복사
 5) kscn에서 conf/kscnd.conf 파일을 아래와 같이 수정
