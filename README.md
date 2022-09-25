@@ -86,8 +86,8 @@ SCN-master 노드와 Endpoint node가 연결 완료된 상태입니다. Endpoint
 서비스 체인들의 블록 생성이 진행되고 있는 것을 확인할 수 있습니다.
 
 ### Endpoint Node
-![image](https://user-images.githubusercontent.com/89952061/192108433-d0d77752-2f7d-4315-a321-60195c44d9cb.png)
-클레이튼 네트워크의 블록이 안정적으로 수집, 저장되고 있는 것을 확인할 수 있습니다.
+![image](https://user-images.githubusercontent.com/89952061/192147421-a7490c4e-c930-42c4-bac3-b4cfe5ceb1e2.png)
+klay.blockNumber를 통해서 클레이튼 네트워크의 블록이 안정적으로 동기화되고 있는 것을 확인할 수 있습니다.
 
 ### Ansible master
 ![image](https://user-images.githubusercontent.com/89952061/192129689-1cfcecd1-4e49-4ba5-b65d-c4d827bc1c9e.png)
