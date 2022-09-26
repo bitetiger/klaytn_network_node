@@ -27,7 +27,7 @@
 ## Resource
 ![image](https://user-images.githubusercontent.com/89952061/192152887-4922f3f0-45e1-4d4a-b5e8-bd33fe143bef.png)
 ### Service chain node
-서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다. 서비스 체인의 보안을 위해 private subnet에 구축되었으며, Endpoint node가 서비스 체인에 접속할 수 있는 bastion host입니다.
+서비스 체인 운영을 위해 SCN-master, SCN-1, SCN-2, SCN-3로 총 4개의 노드가 가동됩니다. SCN-master는 서비스 체인의 데이터 앵커링과 체인간 토큰 전송을 위해 Endpoint node의 브릿지 역할을 수행합니다. 서비스 체인의 보안을 위해 private subnet에 구축되었으며, Endpoint node가 서비스 체인에 접속할 수 있는 bastion host입니다.
 * EC2 : Ubuntu 22.04 LTS, t2.large
 * Private subnet
 
