@@ -3,7 +3,7 @@
 ### project goals
 높은 TPS와 낮은 수수료 등 서비스 제공을 위한 klaytn Layer 2인 **Service chain 노드**와 klaytn 메인넷의 인터페이스인 **Endpoint 노드**를 주어진 요구조건에 맞춰 구축합니다.
 
-### requirement
+### requirements
   - Klaytn 네트워크
   - 블록체인 네트워크 모니터링툴, IaC, CI/CD 시스템 구축, 오픈소스 활용
   - Sevice Management, Monitoring/Alerting, Security, Automation, Configuration Management 다양한 관점 고려
