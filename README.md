@@ -105,7 +105,7 @@ kend.out 로그를 확인하여 메인넷의 블록을 빠르게 동기화하고
 
 ### Ansible master
 ![image](https://user-images.githubusercontent.com/89952061/192151725-e46cb80f-8e4a-40b9-8ab9-f8c1dc5961bf.png)
-ansible에서 AWS에서 가동 중인 EC2 서버를이 인벤토리에 동적으로 자동할당되었습니다.
+ansible에서 AWS에서 가동 중인 EC2 서버들이 인벤토리에 동적으로 자동할당되었습니다.
 
 ### Grafana Monitoring
 ![image](https://user-images.githubusercontent.com/89952061/192151576-e4b33e78-34e6-4569-804f-a262b9f5f2d0.png)
