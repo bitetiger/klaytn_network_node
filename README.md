@@ -21,7 +21,7 @@
   - [x] Endpoint node의 genesis.json 생성 및 노드 초기화 완료 
   - [x] 환경 구성를 위한 Ansible 설치 및 AWS EC2 Dynamic Inventory와 ping test를 위한 Playbook 생성 및 설정 완료
   - [x] 모니터링을 위한 Grafana 설치 및 가동 완료
-- **Grafana** : 다양한 클라우드 리소스의 메트릭/로그 시각화와 알림을 통해 안정적인 노드 모니터링을 지원합니다. Grafana-EC2 서버를 통해서 운영됩니다. pulic_dns:3000을 브라우저를 통해 접속 시 대시보드 확인이 가능합니다.
+- **Grafana** : 다양한 클라우드 리소스의 메트릭/로그 시각화와 알림을 통해 안정적인 노드 모니터링을 지원합니다. Grafana-EC2 서버를 통해서 운영됩니다. public_dns:3000을 브라우저를 통해 접속 시 대시보드 확인이 가능합니다.
 - **Ansible** : AWS 환경에서 EC2의 Dynamic inventory 생성이 가능하여 노드의 업데이트와 구성관리, 프로비저닝이 가능합니다. Ansible_master 서버를 통해서 운영됩니다.
 
 ## Resource
