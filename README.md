@@ -12,7 +12,7 @@
 효율적인 블록체인 노드 운영을 위해서는 **빠른 인프라 구축**과 **모니터링을 통한 안정적인 운영**, **간편한 구성관리와 프로비저닝**이 요구됩니다. 이 세 가지를 중점으로 프로젝트를 진행했습니다.
 
 ### built with
-- **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스 활용합니다.  
+- **AWS** : EC2, EBS, VPC, Subnet, Nat gateway 등 서버와 네트워크 구축, 보안을 위해 AWS 클라우드 리소스를 활용합니다.  
 
 - **Terraform** : 코드를 통해 노드 구축에 요구되는 AWS 인프라를 빠르게 구성하고 효율적으로 관리할 수 있습니다. Terraform을 통해 아래와 같이 리소스 구성과 환경구성이 완료됩니다. 
   - [x] EC2, VPC, Subnet, Nat gateway, Security Group 등 아키텍처 전반의 인프라 구성 완료
